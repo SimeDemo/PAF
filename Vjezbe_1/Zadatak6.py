@@ -3,12 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def roxy(x, y, ox, oy, r):
-        #crtanje kruznice i tocke
+    #crtanje kruznice i tocke
     ax = plt.gca()
     ax.cla()
     kruznica = plt.Circle((ox, oy), r, color="b", fill=False)
-    ax.set_ylim(-10, 10)
-    ax.set_xlim(-10, 10)
     ax.add_patch(kruznica)
     plt.plot([x], [y], "ro")
     
