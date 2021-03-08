@@ -6,6 +6,7 @@ def roxy(x, y, ox, oy, r):
     #crtanje kruznice i tocke
     ax = plt.gca()
     ax.cla()
+    plt.axis("equal")
     kruznica = plt.Circle((ox, oy), r, color="b", fill=False)
     ax.add_patch(kruznica)
     plt.plot([x], [y], "ro")

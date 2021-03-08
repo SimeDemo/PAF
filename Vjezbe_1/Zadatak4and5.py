@@ -30,7 +30,7 @@ while True:
         print("netocan unos")
 
 fja(x1, x2, y1, y2)
-
+plt.axis("equal")
 plt.plot([x1, x2], [y1, y2], "ro")
 
 if x1 >= x2:
