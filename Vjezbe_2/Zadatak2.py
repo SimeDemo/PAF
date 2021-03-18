@@ -1,21 +1,33 @@
+from math import cos, sin, pi
+import numpy as np 
 import matplotlib.pyplot as plt
-from math import sin, cos, pi
-import numpy as np
 
-
-v0 = 30
 theta = (30/360)*2*pi 
-xy_x = []
-xy_y = []
+v0 = 20
 g = 9.81
-time = np.linspace(0, 10, 1000)
+counter = -1 
+dt = 0.1
+x_os = [0]
+y_os = [0]
+t = [0]
 
-for i in time:
-    x_os = v0 * i * cos(theta)
-    y_os = (v0 * i * sin(theta)) - (0.5 * g * (i**2))
-    xy_x.append(x_os)
-    xy_y.append(y_os)
+v0x = v0*cos(theta)
+v0y = v0*sin(theta)
 
-plt.plot(xy_x, xy_y)
-plt.gca()
+vy = [v0y]
+
+for i in range(100):
+    counter += 1
+    x_os.append(x_os[counter] + (v0x * dt))
+    vy.append(vy[counter] - g * dt)
+    y_os.append(y_os[counter] + vy[counter] * dt)
+    t.append(t[counter] + dt)
+
+fig, axs = plt.subplots(1, 3)
+axs[0].plot(x_os, y_os)
+axs[0].set_title("x-y graf")
+axs[1].plot(t, x_os)
+axs[1].set_title('x-t graf')
+axs[2].plot(t, y_os)
+axs[2].set_title('y-t graf')
 plt.show()

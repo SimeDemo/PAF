@@ -2,52 +2,88 @@ import matplotlib.pyplot as plt
 from math import sin, cos, pi, sqrt
 import numpy as np
 
-
+# rjesiti time problem 
 def kosi_hitac(theta, v0, time):
 
-    xy_x = []
-    xy_y = []
-    g = 9.81
-    time = np.linspace(0, time, 1000)
     theta = (theta/360)*2*pi 
-    counter = -1
+    g = 9.81
+    counter = -1 
+    counter2 = -1
+    accuracy = 1000
+    dt = time / accuracy
+    x_os = [0]
+    y_os = [0]
+    t = [0]
 
-    for i in time:
-        x_os = v0 * i * cos(theta)
-        y_os = (v0 * i * sin(theta)) - (0.5 * g * (i**2))
-        xy_x.append(x_os)
-        xy_y.append(y_os)
+    v0x = v0*cos(theta)
+    v0y = v0*sin(theta)
 
-    for j in xy_y:
+    vy = [v0y]
+
+    for i in range(accuracy):
         counter += 1
-        if j < 0:
-            print(j)
-            print(counter)
-            break
+        x_os.append(x_os[counter] + (v0x * dt))
+        vy.append(vy[counter] - g * dt)
+        y_os.append(y_os[counter] + vy[counter] * dt)
+        t.append(t[counter] + dt)
 
-    plt.plot(xy_x, xy_y)
+    for j in y_os:
+        if j < 0:
+            break
+        counter2 += 1
+
+    plt.plot(x_os, y_os)
     plt.axis("equal")
-    plt.ylim(0)
-    plt.xlim(0, xy_x[counter])
-    plt.gca()
+    plt.xlim(0, x_os[counter2-1])
+    plt.ylim(bottom=0)
     plt.show()
     
 
 def max_h(v0, theta): 
-
+    # y komponenta brzine na max h je jednaka nuli
     g = 9.81
     theta = (theta/360)*2*pi 
-    max_h = ((v0**2) * (sin(theta)**2)) / (2 * g)
+    dt = 0.1
 
-    return print(f"Maksimalna visina koju je tijelo postiglo iznosi {max_h} metara")
+    v0y = v0*sin(theta)
+    vy = v0y
+    h = 0 # u zadatku nije pisalo pa sam stavio da je pocetna visina 0
+ 
+    while vy > 0:
+        vy -=  g * dt
+        h += vy * dt
+
+    return print(f"Maksimalna visina koju je tijelo postiglo iznosi {h} metara")
 
 
 def domet(v0, theta):
-
+    # slicno kao i max_h, samo je ovdje x = 0 glavni dio 
+    theta = (theta/360)*2*pi 
     g = 9.81
-    theta = (theta/360)*2*pi
-    domet = ((v0**2) * sin(2 * theta)) / g
+    counter = -1 
+    counter2 = -1
+    dt = 0.1
+    x_os = [0]
+    y_os = [0]
+    t = [0]
 
+    v0x = v0*cos(theta)
+    v0y = v0*sin(theta)
+
+    vy = [v0y]
+
+    for i in range(1000):
+        counter += 1
+        x_os.append(x_os[counter] + (v0x * dt))
+        vy.append(vy[counter] - g * dt)
+        y_os.append(y_os[counter] + vy[counter] * dt)
+    
+    for j in y_os:
+        if j < 0:
+            break
+        counter2 += 1
+
+    domet = x_os[counter2]
     return print(f"Domet projektila je {domet} metara")
 
 
@@ -57,13 +93,22 @@ def v_max(v0):
 
 def shooting(ox, oy, r, theta, v0, time):
 
-    xy_x = []
-    xy_y = []
-    g = 9.81
-    time = np.linspace(0, time, 1000)
     theta = (theta/360)*2*pi 
-    counter = -1
+    v0 = 20
+    g = 9.81
+    counter = -1 
+    counter2 = -1
+    accuracy = 1000
+    dt = time / accuracy
+    x_os = [0]
+    y_os = [0]
+    t = [0]
     distance = []
+
+    v0x = v0*cos(theta)
+    v0y = v0*sin(theta)
+
+    vy = [v0y]
 
     ax = plt.cla()
     ax = plt.gca()
@@ -71,21 +116,19 @@ def shooting(ox, oy, r, theta, v0, time):
     kruznica = plt.Circle((ox, oy), r, color="r", fill=False)
     ax.add_patch(kruznica)
 
-    for i in time:
-        x_os = v0 * i * cos(theta)
-        y_os = (v0 * i * sin(theta)) - (0.5 * g * (i**2))
-        xy_x.append(x_os)
-        xy_y.append(y_os)
-
-    for j in xy_y:
+    for i in range(accuracy):
         counter += 1
-        if j < 0:
-            print(j)
-            print(counter)
-            break
+        x_os.append(x_os[counter] + (v0x * dt))
+        vy.append(vy[counter] - g * dt)
+        y_os.append(y_os[counter] + vy[counter] * dt)
 
-    for k in range(len(xy_x)):
-        d = sqrt((xy_x[k]-ox)**2 + (xy_y[k]-oy)**2)
+    for j in y_os:
+        if j < 0:
+            break
+        counter2 += 1
+
+    for k in range(len(x_os)):
+        d = sqrt((x_os[k]-ox)**2 + (y_os[k]-oy)**2)
         distance.append(d)
 
     distance.sort()
@@ -102,7 +145,7 @@ def shooting(ox, oy, r, theta, v0, time):
             break
 
 
-    plt.plot(xy_x, xy_y)
+    plt.plot(x_os, y_os)
     plt.ylim(0)
-    plt.xlim(0, xy_x[counter])
+    plt.xlim(0, x_os[counter2])
     plt.show()
