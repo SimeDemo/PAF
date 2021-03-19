@@ -3,7 +3,7 @@ from math import sin, cos, pi, sqrt
 import numpy as np
 
 # rjesiti time problem 
-def kosi_hitac(theta, v0, time):
+def kosi_hitac(v0, theta, time):
 
     theta = (theta/360)*2*pi 
     g = 9.81
@@ -87,8 +87,23 @@ def domet(v0, theta):
     return print(f"Domet projektila je {domet} metara")
 
 
-def v_max(v0):
-    return print(f"Maksimalna brzina projektila je {v0} m/s")
+def v_max(v0, theta, time):
+    # x komponenta brzine se ne mjenja
+    v0y = v0*sin(theta)
+    accuracy = 1000
+    dt = time / accuracy
+    counter = -1
+    g = 9.81
+
+    vy = [v0y]
+
+    for i in range(accuracy):
+        counter += 1
+        vy.append(vy[counter] - g * dt)
+
+    vy.sort()
+
+    return print(f"Maksimalna brzina projektila je {abs(vy[-1])} m/s")
 
 
 def shooting(ox, oy, r, theta, v0, time):
