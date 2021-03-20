@@ -28,8 +28,6 @@ class Particle:
             x.append(x[counter] + self.v0*delta_t)
 
     def range(self):
-        # x_os = v0 * i * cos(theta)
-        # y_os = (v0 * i * sin(theta)) - (0.5 * g * (i**2))
         counter = -1
         delta_t = 0.1
         x_os = [self.x0]
@@ -37,7 +35,6 @@ class Particle:
         for i in range(10):
             counter += 1
             x_os.append(x_os[counter] + (self.v0 * delta_t * cos(self.theta)))
-            # y_os.append(y_os )
         return print(x_os)
 
     

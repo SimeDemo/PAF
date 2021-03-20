@@ -3,7 +3,7 @@ from math import sin, cos, pi, sqrt
 import numpy as np
 
 # rjesiti time problem 
-def kosi_hitac(v0, theta, time):
+def kosi_hitac(theta, v0, time):
 
     theta = (theta/360)*2*pi 
     g = 9.81
@@ -88,15 +88,17 @@ def domet(v0, theta):
 
 
 def v_max(v0, theta, time):
-    # x komponenta brzine se ne mjenja
-    v0y = v0*sin(theta)
+    
+    counter = -1
+    theta = (theta/360)*2*pi 
+    g = 9.81
     accuracy = 1000
     dt = time / accuracy
-    counter = -1
-    g = 9.81
+    v0x = v0*cos(theta)
+    v0y = v0*sin(theta)
 
     vy = [v0y]
-
+    
     for i in range(accuracy):
         counter += 1
         vy.append(vy[counter] - g * dt)

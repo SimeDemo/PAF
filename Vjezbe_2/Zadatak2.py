@@ -15,7 +15,7 @@ v0x = v0*cos(theta)
 v0y = v0*sin(theta)
 
 vy = [v0y]
-
+#
 for i in range(100):
     counter += 1
     x_os.append(x_os[counter] + (v0x * dt))

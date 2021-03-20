@@ -4,4 +4,4 @@ import kinematika as kin
 kin.kosi_hitac(25, 60)
 
 # jednoliko_gibanje(m, F)
-kin.jednoliko_gibanje(50, 700)
+kin.jednoliko_gibanje(80, 700)

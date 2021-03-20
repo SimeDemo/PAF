@@ -32,9 +32,9 @@ def jednoliko_gibanje(m, F):
     axs[1].set(xlabel="vrijeme, t [s]", ylabel="brzina, v [m/s]")
     axs[2].plot(t, x)
     axs[2].set(xlabel="vrijeme, t [s]", ylabel="put, x [m]")
-    axs[2].set_title("Put")
     axs[0].set_title("Akceleracija")
     axs[1].set_title("Brzina")
+    axs[2].set_title("Put")
     plt.show()
 
 
