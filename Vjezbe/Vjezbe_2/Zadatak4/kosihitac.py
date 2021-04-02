@@ -153,6 +153,7 @@ def shooting(ox, oy, r, theta, v0, time):
     for l in distance:
         if l <= r:
             print("Meta je pogodjena")
+            print(l-r)
             break
         elif l-r < 0.001:
             print("Meta je pogodjena")

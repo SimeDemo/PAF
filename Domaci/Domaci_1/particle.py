@@ -75,7 +75,7 @@ class Particle:
 
     def total_time(self, delta_t):
 
-        print(len(self.y) * delta_t)
+        return self.y * delta_t
 
 
     def max_speed(self):
@@ -168,7 +168,8 @@ class Particle:
 
         return angles_to_hit # u stupnjevima
 
-p1 = Particle(30, 0, 0, 0)
+p1 = Particle(30, 30, 0, 0)
+p1.velocity_to_hit_target(4, 4, 2) # treba mu malo duze da izracuna rezultat
 p1.angle_to_hit_target(4, 4, 2)
 
 

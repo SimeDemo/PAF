@@ -12,3 +12,9 @@ numerically = p1.range_p(0.001)
 error = abs(analy - numerically) / analy 
 
 print(f"odstupanje je {error * 100}%")
+
+p1.total_time(0.001)
+
+p1.max_speed()
+
+p1.velocity_to_hit_target()
