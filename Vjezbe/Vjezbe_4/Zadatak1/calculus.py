@@ -35,14 +35,16 @@ def integrate_rectangle(func, mini, maxi, steps):
      # steps = broj podjela za integraciju
     x = np.linspace(mini, maxi, steps)
     values = []
+    counter = 0
 
     # lower 
     for i in x:
         if i == x[0]:
             dx = i - 0
         else:
-            dx = i - x[i-1]
+            dx = i - x[couter - 1]
         values.append(func(i)*dx)
+        counter +=1
 
     lower = sum(values[0:-1])
     upper = sum(values[1:])
