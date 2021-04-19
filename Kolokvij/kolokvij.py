@@ -60,7 +60,7 @@ class ProjectileMotion:
 
         self.y.sort()
 
-        return print(self.y[-1])
+        return print(f"Max height with dt={dt} is: {self.y[-1]}")
 
 
     def flightTime(self, dt):
@@ -70,7 +70,7 @@ class ProjectileMotion:
         while self.y[-1] >= 0:
             self.__move(dt) 
 
-        return print(self.t[-1])
+        return print(f"Flight time with dt={dt} is: {self.t[-1]}")
 
 
     def drag_force(self, k, v): # k is found between 0 and 1 
@@ -107,8 +107,8 @@ p1 = ProjectileMotion(10, 10)
 
 tlist, xlist, ylist, vlist = p1.eulersMethod(0.01)
 
-# p1.maxHeight(0.01)
-# p1.flightTime(0.05)
+p1.maxHeight(0.01)
+p1.flightTime(0.05)
 
 
 def plotGraph():
@@ -134,7 +134,7 @@ def plotGraph():
 
     plt.show()
 
-# plotGraph()
+plotGraph()
 
 tlist_drag, xlist_drag, ylist_drag, vlist_drag = p1.dragged_motion(0.01)
 
