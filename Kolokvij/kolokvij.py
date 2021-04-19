@@ -75,7 +75,7 @@ class ProjectileMotion:
 
     def drag_force(self, k, v): # k is found between 0 and 1 
 
-        return -k * v
+        return -k * abs(v)
 
 
     def __moveDrag(self, dt):
