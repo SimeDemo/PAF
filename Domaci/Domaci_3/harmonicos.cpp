@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 class HarmonicOscillator {
@@ -53,10 +54,26 @@ class HarmonicOscillator {
             }
         }
     
+    public:
+
+        void write() {
+            
+            ofstream myfile;
+                myfile.open("plot_data.txt");
+                for (int i = 0; i < a.size(); i++) {
+                    myfile << "acceleration" << a.at(i) << " ";
+                    myfile << "velocity " << v.at(i) << " ";
+                    myfile << "xcoord " << x.at(i) << " ";
+                    myfile << "time " << t_list.at(i) << " ";
+                }
+                myfile.close();
+        }
+    
 };
 
 int main() {
 
     HarmonicOscillator HarmonicOscillator (10, 5, 5, 5, 50);
     HarmonicOscillator.oscillate(0.01);
+    HarmonicOscillator.write();
 }
