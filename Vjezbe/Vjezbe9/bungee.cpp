@@ -193,8 +193,6 @@ class Bungee {
             }
             myfile.close();
 
-
-
             __reset();
 
             while (t.back() < total_time) {
@@ -242,7 +240,7 @@ class Bungee {
 
 int main() {
 
-    Bungee r1 (100, 50, 50, 0.1, 2, 50, 100);
+    Bungee r1 (100, 50, 60, 0.1, 2, 50, 100);
     //          h    l   m   a    c    k   tt
     r1.jump_and_write(0.001);
 }
