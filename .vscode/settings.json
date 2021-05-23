@@ -8,6 +8,7 @@
         "string": "cpp",
         "vector": "cpp",
         "fstream": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "iosfwd": "cpp"
     }
 }
