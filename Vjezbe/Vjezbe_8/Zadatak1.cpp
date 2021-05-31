@@ -195,16 +195,16 @@ void range_vs(float dt) {
         cds.push_back(cd);
     }
 
-    for (float m = 0.01; m < 7.3; m = m + 0.001) { // masa neka ide od 0.01 do 7.3 (tezine muske kugle u atletici :) )
-    
-        masses.push_back(m);
-    }
-
     for (int j = 0; j < cds.size(); j++) {
 
         Projectile p1 (10, 30, 1.227, cds.at(j), 0.1, 5, 0, 0);
 
         ranges_cd.push_back(p1.range(0.01));
+    }
+
+    for (float m = 0.01; m < 7.3; m = m + 0.001) { // masa neka ide od 0.01 do 7.3 (tezine muske kugle u atletici :) )
+    
+        masses.push_back(m);
     }
 
     for (int l = 0; l < masses.size(); l++) {

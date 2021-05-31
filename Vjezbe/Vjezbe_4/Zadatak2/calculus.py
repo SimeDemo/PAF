@@ -26,18 +26,26 @@ def derivate_2pm(func, mini, maxi, epsilon):
     derivations = []
 
     for i in int_range:
-        derivations.append(derivate2(f1, i, epsilon))
+        derivations.append(derivate2(func, i, epsilon))
 
     return derivations, int_range
 
 
 def integrate_rectangle(func, mini, maxi, steps):
+    lower_list = []
+    upper_list = []
     dx = (abs(maxi - mini)) / steps
     values = []
 
     for i in range(steps+1):
         values.append(func(i*dx)*dx)
 
+    for j in values:
+        lower_list.append(j)
+        upper_list.append(j)
+
+    del lower_list[-1]
+    del upper_list[0]
     lower = sum(values[0:-1])
     upper = sum(values[1:])
 
@@ -53,3 +61,14 @@ def integrate_trapezoid(func, mini, maxi, steps):
     value = (sum(values)*dx) / 2
 
     return value
+
+def integrate_upper_lower(func, mini, maxi, steps):
+    dx = (abs(maxi - mini)) / steps
+    up = 0
+    down = 0
+    for i in range(0, steps):
+        up += func((i+1)*dx)*dx
+        down += func(i*dx)*dx
+        
+    return up, down
+

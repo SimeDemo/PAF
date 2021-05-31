@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\38599\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
+    "python.pythonPath": "C:\\Users\\38599\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
     "files.associations": {
         "ostream": "cpp",
         "iostream": "cpp",
@@ -11,4 +11,7 @@
         "cmath": "cpp",
         "iosfwd": "cpp"
     }
+}
+{
+    "cmake.cmakePath": "/path/to/cmake"
 }
