@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+#include <algorithm>
 #include <math.h>
 
 void print_list(int list[]) {
@@ -34,13 +35,26 @@ void replace(int list[], int a, int b) {
 }
 
 
+
+
 int main() {
 
     int set_wn[5] = {0, 1, 2, 3, 4};
 
     print_list(set_wn);
 
-    print_interval(set_wn, 0, 2); // ovdje imam error za koji ne znam rjesenje pa bi volio to prouciti s vama na satu, ne znam dalje s time...
+    print_interval(set_wn, 0, 2);
+
+    cout << endl;
+
+    replace(set_wn, 0, 4);
+    print_list(set_wn);
+
+    sort(begin(set_wn), end(set_wn));
+    print_list(set_wn);
+
+    reverse(begin(set_wn), end(set_wn));
+    print_list(set_wn);
 
     return 0;
 }
