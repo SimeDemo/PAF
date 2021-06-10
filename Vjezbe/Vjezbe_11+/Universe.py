@@ -1,5 +1,6 @@
 import math as m
 import numpy as np
+from matplotlib.animation import FuncAnimation
 
 
 class Universe:
@@ -17,11 +18,11 @@ class Universe:
     def __move(self, dt):
 
         for i in range(len(self.planets)):
-            ga = np.array([0,0])
+            ga = np.array([0.,0.])
             
             for j in range(len(self.planets)):
                 if i != j:
-                    ga = ga + self.planets[i].GFA(self.planets[j])
+                    ga += self.planets[i].GFA(self.planets[j])
                     # jel mozete dodatno pojasniti zasto se u liniji iznad mora pisati ga = ga...
                     # umjesti ga +=... , inace izacuje error
                     #numpy.core._exceptions.UFuncTypeError: Cannot cast ufunc 'add' output from
