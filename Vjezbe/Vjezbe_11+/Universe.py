@@ -23,15 +23,12 @@ class Universe:
             for j in range(len(self.planets)):
                 if i != j:
                     ga += self.planets[i].GFA(self.planets[j])
-                    # jel mozete dodatno pojasniti zasto se u liniji iznad mora pisati ga = ga...
-                    # umjesti ga +=... , inace izacuje error
-                    #numpy.core._exceptions.UFuncTypeError: Cannot cast ufunc 'add' output from
-                    # dtype('float64') to dtype('int32') with casting rule 'same_kind'
+                    
             self.planets[i].ga = ga
 
         for planet in self.planets:
 
-            planet.velocity = planet.velocity + planet.ga * dt # ocito i ovdje baca isti error...
+            planet.velocity = planet.velocity + planet.ga * dt 
             planet.position = planet.position + planet.velocity * dt
             planet.xcoords.append(planet.position[0])
             planet.ycoords.append(planet.position[1])
@@ -41,9 +38,7 @@ class Universe:
         time = 0
         while time < total_time:
             self.__move(dt) 
-            time = time + dt # note, possible error here -> update: bome je i bio ovjde...
-                             # to bi pod vjezbama objasnio jer me zanima zasto nije racunalo kako
-                             # treba prije, ispalo bi sve oke samo bi graf izgledao ne kao vas
+            time = time + dt 
 
 
 class Planet:
