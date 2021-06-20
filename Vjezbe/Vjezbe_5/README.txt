@@ -1,0 +1,2 @@
+Iskreno, stvarno ne znam zasto je graf u zadatku 2 naopako, nikako da mi upadne u oci greska, ako bude problema zbog toga
+(nisam siguram je li to obavezni zadatak ili ne), mogu li molim vas dobiti 1 extra dan ako nije problem.
