@@ -10,38 +10,32 @@ def cubic_integrate(x):
     
     return (x**4)/4
 
-steps = 1000
-step_range = np.arange(0, steps+10, 50)
-lower, upper, num_rectangle_value = cal.integrate_rectangle(cubic, 0, 5, steps)
-num_trapezoid_value = cal.integrate_trapezoid(cubic, 0, 5, steps)
-upper_List, lower_list = cal.integrate_upper_lower(cubic, 0, 5, steps)
-num_rectangle_values = []
-num_trapezoid_values = []
-lower = [] 
-upper = []
-analytical_values = []
+lower0, upper0 = cal.integrate_rectangle(cubic, 0, 10, 100)
+integral0 = cal.integrate_trapezoid(cubic, 0, 10, 100)
+print(f"Donja i gornja meda su: {lower0} i {upper0}")
+print(f"Rezultat integrala je {integral0}")
 
-for i in step_range:
+a, b = 0, 5
+xlist, ylist1, ylist2, ylist3, ylist4 = [], [], [], [], []
+dn = 50
 
-    lower, upper, num_rectangle_value = cal.integrate_rectangle(cubic, 0, 5, i)
-    num_rectangle_values.append(num_rectangle_value)
+for i in range(1, 20, 1):
+    xlist.append(dn*i)
 
-    num_trapezoid_values.append(cal.integrate_trapezoid(cubic, 0, 5, i))
+for x in xlist:
+    lower, upper = cal.integrate_rectangle(cubic, a, b, x)
+    integral_trapezoid = cal.integrate_trapezoid(cubic, a, b, x)
+    integral = cubic_integrate(b) - cubic_integrate(a)
 
-    analytical_values.append(cubic_integrate(5))
+    ylist1.append(lower)
+    ylist2.append(upper)
+    ylist3.append(integral_trapezoid)
+    ylist4.append(integral)
 
-# plt.plot(step_range, analytical_values, label="analytical result") # analytical
-# plt.scatter(step_range, num_trapezoid_values, label="numerical-trapezoid result") # numerical-trapezoid
-# plt.scatter(step_range, num_rectangle_values, label="numerical-rectangle result") # numerical-rectangle
-# plt.legend()
-# plt.xlabel("Number of steps")
-# plt.ylabel("Integral value")
-# plt.show()
-plt.plot(step_range, analytical_values, label="analytical result") # analytical
-plt.scatter(step_range, lower, label="numerical-trapezoid result") # numerical-trapezoid
-plt.scatter(step_range, upper, label="numerical-rectangle result") # numerical-rectangle
-plt.legend()
-plt.xlabel("Number of steps")
-plt.ylabel("Integral value")
+plt.plot(xlist,ylist1,".")
+plt.plot(xlist,ylist2,".")
+plt.plot(xlist,ylist3,".")
+plt.plot(xlist,ylist4)
+plt.xlabel("N steps")
+plt.ylabel("integral")
 plt.show()
-

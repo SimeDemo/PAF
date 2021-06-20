@@ -31,44 +31,34 @@ def derivate_2pm(func, mini, maxi, epsilon):
     return derivations, int_range
 
 
-def integrate_rectangle(func, mini, maxi, steps):
-    lower_list = []
-    upper_list = []
-    dx = (abs(maxi - mini)) / steps
-    values = []
+def integrate_rectangle(func, a, b, n):
+    h = (b-a)/n
+    upper = 0
+    lower = 0
+    i = a
+    j = a + h
+    for k in range(n):
+        if abs(func(i)) >= abs(func(j)):
+            upper += func(i)*h
+            lower += func(j)*h
+        else:
+            upper += func(j)*h
+            lower += func(i)*h
+        i += h
+        j += h
 
-    for i in range(steps+1):
-        values.append(func(i*dx)*dx)
+    return lower, upper
 
-    for j in values:
-        lower_list.append(j)
-        upper_list.append(j)
+def integrate_trapezoid(func, a, b, n):
+    h = (b-a) / n
+    integral = 0
+    i = a
+    j = a + h
 
-    del lower_list[-1]
-    del upper_list[0]
-    lower = sum(values[0:-1])
-    upper = sum(values[1:])
+    for k in range(n):
+        integral += ((func(i) + func(j))/2)*h
+        i += h
+        j += h
 
-    return lower, upper, sum(values)
-
-def integrate_trapezoid(func, mini, maxi, steps):
-    dx = (abs(maxi - mini)) / steps
-    values = [] 
-
-    for i in range(steps+1):
-        values.append((func(i*dx) + func((i+1)*dx)))
-
-    value = (sum(values)*dx) / 2
-
-    return value
-
-def integrate_upper_lower(func, mini, maxi, steps):
-    dx = (abs(maxi - mini)) / steps
-    up = 0
-    down = 0
-    for i in range(0, steps):
-        up += func((i+1)*dx)*dx
-        down += func(i*dx)*dx
-        
-    return up, down
+    return integral
 
