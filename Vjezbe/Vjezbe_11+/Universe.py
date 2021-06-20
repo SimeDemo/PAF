@@ -8,6 +8,7 @@ class Universe:
     def __init__(self):
         
         self.planets = []
+        self.sunc, self.mercc, self.venc, self.earc, self.marsc, self.comc = [], [], [], [], [], []
 
     
     def create(self, planet):
@@ -18,11 +19,11 @@ class Universe:
     def __move(self, dt):
 
         for i in range(len(self.planets)):
-            ga = np.array([0.,0.])
+            ga = np.array([0, 0])
             
             for j in range(len(self.planets)):
                 if i != j:
-                    ga += self.planets[i].GFA(self.planets[j])
+                    ga = ga + self.planets[i].GFA(self.planets[j])
                     
             self.planets[i].ga = ga
 
@@ -32,18 +33,35 @@ class Universe:
             planet.position = planet.position + planet.velocity * dt
             planet.xcoords.append(planet.position[0])
             planet.ycoords.append(planet.position[1])
+            
+            if planet == self.planets[0]:
+                self.sunc.append(np.array([planet.position[0], planet.position[1]]))
 
-    
+            elif planet == self.planets[1]:
+                self.marsc.append(np.array([planet.position[0], planet.position[1]]))
+
+            elif planet == self.planets[2]:
+                self.earc.append(np.array([planet.position[0], planet.position[1]]))
+
+            elif planet == self.planets[3]:
+                self.venc.append(np.array([planet.position[0], planet.position[1]]))
+
+            elif planet == self.planets[4]:
+                self.mercc.append(np.array([planet.position[0], planet.position[1]]))
+
+            elif planet == self.planets[5]:
+                self.comc.append(np.array([planet.position[0], planet.position[1]]))
+
+                
     def evolve(self, total_time, dt):
         time = 0
         while time < total_time:
             self.__move(dt) 
             time = time + dt 
 
-
 class Planet:
 
-    def __init__(self, mass, r0, v0):
+    def __init__(self, mass, radius, r0, v0):
 
         self.m, self.r0, self.v0, self.a0 = mass, r0, v0, np.array([0, 0])
         self.position, self.velocity, self.ga = r0, v0, self.a0
